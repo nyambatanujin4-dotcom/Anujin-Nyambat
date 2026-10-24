@@ -1,0 +1,6 @@
+{
+  "name": "Анужин — Хувийн танилцуулга",
+  "description": "Сайна уу, намайг Анужин гэдэг. Би 10 настай. Миний хобби бол ном уншиж, шүлэг бичих. Сургалтанд сууж буй зорилго нь AI ашиглаж сурах. Би Юки нэртэй муур тэжээдэг.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

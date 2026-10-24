@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="mn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Миний модел — Анужин</title>
+    <meta name="description" content="Би том болоод зохиолч болохыг хүсдэг. Монгол хэл, түүх, уран зохиолын хичээлдээ шамдаж, AI ашиглан бичсэн шүлгээ edit хийж засах зорилготой." />
+    <meta property="og:title" content="Миний модел — Анужин" />
+    <meta property="og:description" content="Би том болоод зохиолч болохыг хүсдэг. AI ашиглан бичсэн шүлгээ edit хийж засна." />
+
+    <!-- Google Fonts Inter Tight -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
+
+    <style>
+      :root {
+        --ink: #121410;
+        --olive: #4d6a10;
+        --green: #6f9a0c;
+        --lime: #b4cd52;
+        --pill: #e7efcf;
+        --line: #eef0ea;
+        --bg: #fff;
+        --radius: 22px;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        background: #e9eee0;
+      }
+      body {
+        font-family: "Inter Tight", system-ui, -apple-system, sans-serif;
+        color: var(--ink);
+        background: #fff;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+        min-height: 100vh;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .nav {
+        position: sticky;
+        top: 20px;
+        z-index: 50;
+        max-width: 860px;
+        margin: 0 auto 40px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px 12px 8px 20px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        backdrop-filter: blur(10px);
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: -.03em;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 38px;
+        padding: 0 18px;
+        border-radius: 999px;
+        background: var(--olive);
+        color: #f3f8e4;
+        font-size: 13.5px;
+        font-weight: 600;
+        letter-spacing: -.01em;
+        transition: transform .2s, background .2s;
+      }
+      .btn:hover {
+        transform: translateY(-1px);
+        background: #5a7c14;
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        font-size: 11.5px;
+        font-weight: 500;
+        padding: 6px 14px;
+        border-radius: 999px;
+        background: var(--pill);
+        color: #2c3a10;
+        letter-spacing: .01em;
+      }
+      .container {
+        max-width: 960px;
+        margin: 0 auto;
+        padding: 40px 24px 100px;
+      }
+      .hero-box {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+      .hero-box h1 {
+        font-size: clamp(32px, 4.5vw, 56px);
+        font-weight: 500;
+        line-height: 1.15;
+        letter-spacing: -.04em;
+        margin: 16px 0 18px;
+      }
+      .hero-box h1 em {
+        color: var(--olive);
+        font-style: italic;
+        font-weight: 600;
+      }
+      .hero-box p {
+        font-size: 16px;
+        line-height: 1.7;
+        color: #444d36;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      .subhead {
+        font-size: 19px;
+        font-weight: 600;
+        color: var(--olive);
+        margin: 44px 0 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+      }
+      .card {
+        background: linear-gradient(135deg, rgba(247, 250, 240, 0.95), rgba(231, 239, 207, 0.65));
+        border: 1px solid rgba(180, 205, 82, 0.35);
+        border-radius: 24px;
+        padding: 28px 24px;
+        box-shadow: 0 10px 30px rgba(60, 80, 10, 0.04);
+        transition: transform .3s ease, box-shadow .3s ease;
+      }
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 18px 40px rgba(60, 80, 10, 0.1);
+      }
+      .card-icon {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        background: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        margin-bottom: 16px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      }
+      .card h3 {
+        font-size: 20px;
+        font-weight: 600;
+        color: var(--ink);
+        margin-bottom: 10px;
+        letter-spacing: -.02em;
+      }
+      .card p {
+        font-size: 14px;
+        line-height: 1.6;
+        color: #3b4231;
+      }
+      @keyframes catBounce {
+        0%, 100% {
+          transform: translateY(0) rotate(0deg);
+        }
+        25% {
+          transform: translateY(-8px) rotate(-3deg);
+        }
+        50% {
+          transform: translateY(-13px) rotate(3deg);
+        }
+        75% {
+          transform: translateY(-4px) rotate(-1deg);
+        }
+      }
+      @keyframes pawFloat {
+        0%, 100% {
+          transform: scale(1) translateY(0);
+          opacity: 0.9;
+        }
+        50% {
+          transform: scale(1.18) translateY(-5px);
+          opacity: 1;
+        }
+      }
+      .bouncing-cat {
+        position: relative;
+        display: inline-block;
+        animation: catBounce 2.2s ease-in-out infinite;
+      }
+      .yuki-badge-wrap {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        margin-bottom: 14px;
+      }
+      .yuki-avatar-img {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid #fff;
+        box-shadow: 0 4px 16px rgba(60, 80, 10, 0.18);
+        display: block;
+      }
+      .yuki-paw {
+        position: absolute;
+        bottom: -4px;
+        right: -4px;
+        background: #fff;
+        border-radius: 50%;
+        padding: 2px 5px;
+        font-size: 13px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        animation: pawFloat 2s ease-in-out infinite;
+      }
+      .yuki-img-container {
+        margin-top: 14px;
+        position: relative;
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 8px 24px rgba(60, 80, 10, 0.12);
+        border: 2px solid rgba(255,255,255,0.9);
+      }
+      .yuki-full-img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        object-position: center 30%;
+        transition: transform .5s ease;
+      }
+      .card:hover .yuki-full-img {
+        transform: scale(1.04);
+      }
+      .yuki-tag {
+        position: absolute;
+        bottom: 10px;
+        left: 12px;
+        background: rgba(255, 255, 255, 0.94);
+        backdrop-filter: blur(8px);
+        padding: 4px 12px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--olive);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      }
+      .cat-facts-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        width: 100%;
+        margin-top: 20px;
+      }
+      .cat-fact-card {
+        background: #ffffff;
+        border: 1px solid rgba(180, 205, 82, 0.35);
+        border-radius: 20px;
+        padding: 22px 20px;
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+        transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+      }
+      .cat-fact-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 24px rgba(60, 80, 10, 0.09);
+        border-color: var(--green);
+      }
+      .cat-fact-icon {
+        width: 46px;
+        height: 46px;
+        flex-shrink: 0;
+        border-radius: 14px;
+        background: var(--pill);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+      }
+      .cat-fact-content h4 {
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--ink);
+        margin-bottom: 6px;
+        letter-spacing: -.02em;
+      }
+      .cat-fact-content p {
+        font-size: 13.5px;
+        line-height: 1.55;
+        color: #434c37;
+      }
+      @media (max-width: 768px) {
+        .cat-facts-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .model-cta-card {
+        margin-top: 60px;
+        background: linear-gradient(135deg, rgba(247, 250, 240, 0.95), rgba(231, 239, 207, 0.85));
+        border: 1px solid rgba(180, 205, 82, 0.45);
+        border-radius: 28px;
+        padding: 44px 28px;
+        text-align: center;
+        box-shadow: 0 16px 40px rgba(60, 80, 10, 0.08);
+      }
+      .model-cta-card h2 {
+        font-size: clamp(28px, 3.6vw, 42px);
+        font-weight: 500;
+        line-height: 1.2;
+        letter-spacing: -.03em;
+        margin: 16px 0 12px;
+        color: var(--ink);
+      }
+      .model-cta-card h2 em {
+        color: var(--olive);
+        font-style: italic;
+        font-weight: 600;
+      }
+      .model-cta-card p {
+        font-size: 15px;
+        line-height: 1.65;
+        color: #38422d;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      .footer {
+        text-align: center;
+        padding: 40px 20px;
+        font-size: 13px;
+        color: #556040;
+        border-top: 1px solid var(--line);
+        margin-top: 80px;
+      }
+      /* Language Switcher Pill */
+      .lang-switcher {
+        display: inline-flex;
+        align-items: center;
+        background: var(--pill);
+        padding: 3px;
+        border-radius: 999px;
+        border: 1px solid rgba(180, 205, 82, 0.5);
+        box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+      }
+      .lang-btn {
+        border: none;
+        background: transparent;
+        color: #4a5c18;
+        font-family: inherit;
+        font-size: 11.5px;
+        font-weight: 600;
+        padding: 4px 10px;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        user-select: none;
+      }
+      .lang-btn:hover {
+        color: var(--ink);
+      }
+      .lang-btn.is-active {
+        background: #ffffff;
+        color: var(--olive);
+        box-shadow: 0 2px 8px rgba(60, 80, 10, 0.16);
+        font-weight: 700;
+      }
+
+      @media (max-width: 768px) {
+        .grid-3 {
+          grid-template-columns: 1fr;
+        }
+        .nav {
+          margin: 10px 16px 30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="nav">
+      <a class="brand" href="/" aria-label="Anujin home">
+        <svg width="26" height="20" viewBox="0 0 30 22">
+          <circle cx="4" cy="17" r="3.6" fill="currentColor"/>
+          <path d="M10.5 18.5 16.8 5.2 25.5 18.5" fill="none" stroke="currentColor" stroke-width="5.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span>anujin</span>
+      </a>
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <div class="lang-switcher" role="group" aria-label="Language selector">
+          <button type="button" class="lang-btn is-active" data-lang="mn" aria-pressed="true">🇲🇳 MN</button>
+          <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">🇬🇧 EN</button>
+        </div>
+        <a class="btn" href="/" data-i18n="nav.home">← Нүүр хуудас</a>
+      </div>
+    </header>
+
+    <main class="container">
+      <div class="hero-box">
+        <span class="pill" data-i18n="model.pill">Ирээдүйн хүсэл мөрөөдөл · Миний модел</span>
+        <h1 data-i18n-html="model.title">Би том болоод<br><em>зохиолч болохыг хүсдэг.</em></h1>
+        <p data-i18n="model.intro">
+          Миний хамгийн том мөрөөдөл бол сэтгэл догдлуулам үлгэр, яруу тансаг шүлэг бичдэг зохиолч болох явдал юм. Үүний тулд хичээлдээ шамдан суралцахын зэрэгцээ орчин үеийн хиймэл оюун (AI) ашиглан бичсэн шүлгээ edit хийж засахад суралцаж байна!
+        </p>
+      </div>
+
+      <!-- Сайн сурах 3 хичээл -->
+      <h2 class="subhead"><span data-i18n="model.subheadSubjects">📚 Зохиолч болоход сайн сурах 3 гол хичээл</span></h2>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon">🇲🇳</div>
+          <h3 data-i18n="model.subj1Title">Монгол хэл</h3>
+          <p data-i18n="model.subj1Desc">Үгийн баялаг, дүрмийн найруулга, эх хэлнийхээ уянгалаг яруу үгсийг нарийн судалж, зөв найруулан бичих суурь ур чадвараа хөгжүүлнэ.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📜</div>
+          <h3 data-i18n="model.subj2Title">Түүх</h3>
+          <p data-i18n="model.subj2Desc">Өнгөрсөн үеийн баатарлаг түүх, өвөг дээдсийн соёл, сонирхолтой бодит үйл явдлуудаас сэдэвлэн адал явдалт зохиол бүтээхэд түүхийн мэдлэг хамгийн чухал.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">📖</div>
+          <h3 data-i18n="model.subj3Title">Уран зохиол</h3>
+          <p data-i18n="model.subj3Desc">Дэлхийн болон Монголын шилдэг зохиолчдын бүтээлийг уншиж, шүлгийн айзам хэмнэл, зохиолын өрнөл, дүрүүдийн дотоод ертөнцийг нээх урлагт суралцана.</p>
+        </div>
+      </div>
+
+      <!-- AI яагаад хэрэгтэй вэ? & Юки -->
+      <h2 class="subhead" style="margin-top: 60px;"><span data-i18n="model.subheadAi">🤖 AI яагаад хэрэгтэй вэ? & Бяцхан туслах Юки</span></h2>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon">✍️</div>
+          <h3 data-i18n="model.aiCard1Title">Шүлгээ Edit хийж засах</h3>
+          <p data-i18n="model.aiCard1Desc">Бичсэн шүлгийнхээ мөр бадгийг нягтлах, үгийн хэмнэлийг шалгах, үгийн баялгаа нэмэгдүүлж улам яруу тансаг болгон засахад AI хамгийн сайн туслагч болно.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">💡</div>
+          <h3 data-i18n="model.aiCard2Title">Шинэ содон санаа гаргах</h3>
+          <p data-i18n="model.aiCard2Desc">Үлгэр, өгүүллэгийн сонирхолтой эхлэл, төгсгөл, дүрийн зан чанар, содон дүрслэлүүдийг олоход AI-аас санаа авч хамтран бүтээлчээр ажиллана.</p>
+        </div>
+        <div class="card">
+          <div class="yuki-badge-wrap">
+            <div class="bouncing-cat">
+              <img src="/src/assets/images/real_yuki_cat_1792810908224.jpg" alt="Цагаан муур Юки" class="yuki-avatar-img">
+              <span class="yuki-paw">🐾</span>
+            </div>
+            <div>
+              <span class="pill" style="background: #fff; margin-bottom: 4px;" data-i18n="model.yukiRolePill">Зохиолын гол дүр</span>
+              <h3 style="margin-bottom: 0;" data-i18n="model.yukiRoleTitle">Онгод хайрлагч муур Юки</h3>
+            </div>
+          </div>
+          <p data-i18n="model.yukiRoleDesc">Цас мэт цагаахан үстэй, хоёр өөр өнгийн нүдтэй, эрх дураараа бяцхан муужгай Юки маань миний зохиолуудын гол баатар болж, шүлэг зохиол бичих үед дэргэд эрхлэн онгод хайрладаг хамгийн дотны анд минь юм.</p>
+          <div class="yuki-img-container">
+            <img src="/src/assets/images/real_yuki_cat_1792810908224.jpg" alt="Сакура цэцэгт цагаан муур Юки" class="yuki-full-img">
+            <div class="yuki-tag" data-i18n="model.yukiPhotoTag">Цас мэт цагаан & Хоёр өөр нүдэт Юки 🌸</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Муур Юкигийн маань тухай сонирхолтой 4 баримт -->
+      <h2 class="subhead" style="margin-top: 60px;"><span data-i18n="model.catFactsTitle">🐾 Муур Юкигийн маань тухай сонирхолтой 4 баримт</span></h2>
+      <div class="cat-facts-grid">
+        <div class="cat-fact-card">
+          <div class="cat-fact-icon">👀</div>
+          <div class="cat-fact-content">
+            <h4 data-i18n="model.fact1Title">Хоёр өөр өнгийн нүдтэй</h4>
+            <p data-i18n="model.fact1Desc">Юкигийн нэг нүд нь далай шиг гүн цэнхэр, нөгөө нүд нь наран шар алтлаг өнгөтэй (гетерохроми). Яг л үлгэрийн шидэт сахиус шиг гайхамшигтай харцтай!</p>
+          </div>
+        </div>
+
+        <div class="cat-fact-card">
+          <div class="cat-fact-icon">❄️</div>
+          <div class="cat-fact-content">
+            <h4 data-i18n="model.fact2Title">Цас мэт цагаахан зөөлөн үстэй</h4>
+            <p data-i18n="model.fact2Desc">Шинэхэн орсон хөвсгөр цас шиг цав цагаан, булбарай зөөлөн үстэй. Япон хэлээр "Юки" (Yuki) гэдэг нь "Цас" гэсэн үзэсгэлэнтэй утгатай билээ.</p>
+          </div>
+        </div>
+
+        <div class="cat-fact-card">
+          <div class="cat-fact-icon">😸</div>
+          <div class="cat-fact-content">
+            <h4 data-i18n="model.fact3Title">Эрх дураараа бяцхан муужгай</h4>
+            <p data-i18n="model.fact3Desc">Маш эрх, дураараа зантай! Намайг ном уншиж, шүлэг бичиж байхад дэвтэр дээр минь эрхлэн ирж хэвтээд дулаахан тэвэрт минь унтах дуртай.</p>
+          </div>
+        </div>
+
+        <div class="cat-fact-card">
+          <div class="cat-fact-icon">🎶</div>
+          <div class="cat-fact-content">
+            <h4 data-i18n="model.fact4Title">Шидэт хүржигнэх дуу (Purring)</h4>
+            <p data-i18n="model.fact4Desc">Эрхлэх дуртай үедээ зөөлнөөр хүржигнэдэг бөгөөд энэ дуу нь намайг тайвшруулж, хамгийн уянгалаг шинэ шүлэг бичих онгодыг бэлэглэдэг.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Төгсгөлийн уриалга: Мөрөөдлийнхөө зүг урагшаа! -->
+      <div class="model-cta-card">
+        <span class="pill" data-i18n="cta.pill">Танилцсандаа таатай байна</span>
+        <h2 data-i18n-html="cta.title">Мөрөөдлийнхөө зүг<br><em>урагшаа!</em></h2>
+        <p data-i18n="cta.desc">Ном, шүлэг, эрх бяцхан муур Юкитэйгээ хамт зохиолч болох нандин мөрөөдөлдөө хүрэхээр тэмүүлж байна. Надтай танилцсанд баярлалаа!</p>
+        <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 22px;">
+          <a class="btn" href="/" data-i18n="cta.backHome">← Нүүр хуудас руу буцах 🌸</a>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer" data-i18n="footer.copy">
+      © 2026 Анужин. Бүх эрх хамгаалагдсан.
+    </footer>
+    <script type="module" src="/src/i18n/lang-switcher.ts"></script>
+  </body>
+</html>
